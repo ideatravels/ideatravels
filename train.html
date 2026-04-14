@@ -94,8 +94,7 @@ function sendWhatsApp(){
  let name=document.getElementById(`name${i}`).value;
  let age=document.getElementById(`age${i}`).value;
  let gender=document.getElementById(`gender${i}`).value;
- message+=`Passenger ${i}: ${name}, ${age}, ${gender}%0A`;
- }
+ message+=`Passenger ${i}: ${name}, ${age} year, ${gender}%0A`;
 
  let url=`https://wa.me/919661032450?text=${message}`;
  window.open(url,'_blank');
