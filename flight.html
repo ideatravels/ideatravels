@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flight Ticket Booking - Idea Travels</title>
+<style>
+body{font-family:Arial;margin:0;background:#f4f7fb;}
+header{background:#ff7e00;color:white;padding:15px;text-align:center;}
+.container{padding:20px;max-width:600px;margin:auto;background:white;border-radius:10px;box-shadow:0 0 10px rgba(0,0,0,0.1);}
+input,select{width:100%;padding:10px;margin:8px 0;border-radius:5px;border:1px solid #ccc;}
+button{background:#ff7e00;color:white;padding:10px;border:none;width:100%;border-radius:5px;font-size:16px;}
+.nav-btns{display:flex;justify-content:space-between;margin-bottom:10px;}
+.nav-btns a{background:#0b3d4a;color:white;padding:8px 15px;text-decoration:none;border-radius:5px;}
+</style>
+</head>
+<body>
+
+<header>
+<h2>✈ Flight Ticket Booking</h2>
+</header>
+
+<div class="container">
+
+<div class="nav-btns">
+<a href="index.html">🏠 Home</a>
+<a href="javascript:history.back()">⬅ Back</a>
+</div>
+
+<form>
+<input type="text" id="mobile" placeholder="मोबाइल नंबर" required>
+<input type="date" id="date" required>
+<input type="text" id="from" placeholder="कहाँ से उड़ान भरनी है" required>
+<input type="text" id="to" placeholder="कहाँ जाना है" required>
+
+<select id="classType">
+<option value="">क्लास चुनें</option>
+<option value="Economy">Economy</option>
+<option value="Business">Business</option>
+<option value="First Class">First Class</option>
+</select>
+
+<select id="tripType">
+<option value="One Way">One Way</option>
+<option value="Round Trip">Round Trip</option>
+</select>
+
+<input type="date" id="returnDate" placeholder="Return Date (अगर Round Trip हो)">
+
+<select id="passengers" onchange="generateFields()">
+<option value="">यात्री संख्या</option>
+<option value="1">1</option>
+<option value="2">2</option>
+<option value="3">3</option>
+<option value="4">4</option>
+<option value="5">5</option>
+</select>
+
+<div id="passengerDetails"></div>
+
+<button type="button" onclick="sendWhatsApp()">Submit</button>
+</form>
+
+</div>
+
+<script>
+function generateFields(){
+ let count=document.getElementById("passengers").value;
+ let container=document.getElementById("passengerDetails");
+ container.innerHTML="";
+ for(let i=1;i<=count;i++){
+ container.innerHTML+=`
+ <h4>यात्री ${i}</h4>
+ <input type="text" placeholder="नाम" id="name${i}">
+ <input type="number" placeholder="उम्र" id="age${i}">
+ <select id="gender${i}">
+ <option value="पुरुष">पुरुष</option>
+ <option value="महिला">महिला</option>
+ </select>
+ `;
+ }
+}
+
+function sendWhatsApp(){
+ let mobile=document.getElementById("mobile").value;
+ let date=document.getElementById("date").value;
+ let from=document.getElementById("from").value;
+ let to=document.getElementById("to").value;
+ let classType=document.getElementById("classType").value;
+ let tripType=document.getElementById("tripType").value;
+ let returnDate=document.getElementById("returnDate").value;
+ let count=document.getElementById("passengers").value;
+
+ let message=`Flight Ticket Booking%0A`;
+ message+=`Mobile: ${mobile}%0ADeparture Date: ${date}%0AFrom: ${from}%0ATo: ${to}%0AClass: ${classType}%0ATrip Type: ${tripType}%0AReturn Date: ${returnDate}%0APassengers: ${count}%0A`;
+
+ for(let i=1;i<=count;i++){
+ let name=document.getElementById(`name${i}`).value;
+ let age=document.getElementById(`age${i}`).value;
+ let gender=document.getElementById(`gender${i}`).value;
+ message+=`Passenger ${i}: ${name}, ${age}, ${gender}%0A`;
+ }
+
+ let url=`https://wa.me/919661032450?text=${message}`;
+ window.open(url,'_blank');
+}
+</script>
+
+</body>
+</html>

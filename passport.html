@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Passport Service - Idea Travels</title>
+<style>
+body{font-family:Arial;margin:0;background:linear-gradient(120deg,#43e97b,#38f9d7);} 
+header{background:#ff7e00;color:white;padding:15px;text-align:center;font-size:22px;}
+.container{padding:20px;max-width:650px;margin:auto;background:white;border-radius:12px;box-shadow:0 5px 15px rgba(0,0,0,0.2);} 
+input,select{width:100%;padding:10px;margin:8px 0;border-radius:6px;border:1px solid #ccc;} 
+button{background:#ff7e00;color:white;padding:12px;border:none;width:100%;border-radius:6px;font-size:16px;cursor:pointer;} 
+.nav-btns{display:flex;justify-content:space-between;margin-bottom:10px;} 
+.nav-btns a{background:#0b3d4a;color:white;padding:8px 15px;text-decoration:none;border-radius:5px;} 
+</style>
+</head>
+<body>
+
+<header>
+🌍 Passport Service
+</header>
+
+<div class="container">
+
+<div class="nav-btns">
+<a href="index.html">🏠 Home</a>
+<a href="javascript:history.back()">⬅ Back</a>
+</div>
+
+<form>
+
+<select id="type">
+<option value="">सेवा चुनें</option>
+<option value="New Passport">नया पासपोर्ट बनवाना</option>
+<option value="Reissue Passport">पासपोर्ट री-इश्यू / नवीनीकरण</option>
+<option value="Tatkal Passport">तत्काल पासपोर्ट</option>
+</select>
+
+<input type="text" id="name" placeholder="पूरा नाम" required>
+<input type="text" id="father" placeholder="पिता का नाम" required>
+<input type="date" id="dob" required>
+
+<select id="gender">
+<option value="पुरुष">पुरुष</option>
+<option value="महिला">महिला</option>
+<option value="अन्य">अन्य</option>
+</select>
+
+<input type="text" id="place" placeholder="जन्म स्थान">
+<input type="text" id="aadhaar" placeholder="आधार नंबर">
+<input type="text" id="mobile" placeholder="मोबाइल नंबर" required>
+<input type="text" id="address" placeholder="पूरा पता" required>
+
+<p style="color:#0b3d4a;font-weight:bold;">👉 कृपया Submit करने के बाद WhatsApp पर अपना दस्तावेज़ (Aadhaar, Photo, PDF आदि) भेजें</p>
+
+<button type="button" onclick="sendWhatsApp()">Submit</button>
+
+</form>
+
+</div>
+
+<script>
+function sendWhatsApp(){
+ let type=document.getElementById("type").value;
+ let name=document.getElementById("name").value;
+ let father=document.getElementById("father").value;
+ let dob=document.getElementById("dob").value;
+ let gender=document.getElementById("gender").value;
+ let place=document.getElementById("place").value;
+ let aadhaar=document.getElementById("aadhaar").value;
+ let mobile=document.getElementById("mobile").value;
+ let address=document.getElementById("address").value;
+
+ let message=`Passport Service%0A`;
+ message+=`Type: ${type}%0AName: ${name}%0AFather: ${father}%0ADOB: ${dob}%0AGender: ${gender}%0ABirth Place: ${place}%0AAadhaar: ${aadhaar}%0AMobile: ${mobile}%0AAddress: ${address}`;
+
+ let url=`https://wa.me/919661032450?text=${message}`;
+ window.open(url,'_blank');
+}
+</script>
+
+</body>
+</html>
